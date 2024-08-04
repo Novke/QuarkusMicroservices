@@ -1,13 +1,14 @@
 package fon.mas.novica.quarkus.rest;
 
+import fon.mas.novica.quarkus.model.dto.login.UpdatePasswordCmd;
+import fon.mas.novica.quarkus.model.dto.user.CreateUserCmd;
 import fon.mas.novica.quarkus.model.dto.user.UserInfo;
-import fon.mas.novica.quarkus.model.entity.UserEntity;
 import fon.mas.novica.quarkus.service.UsersService;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import org.apache.http.HttpStatus;
 
 import java.util.List;
 
@@ -25,8 +26,42 @@ public class UsersResource {
         return "Hello RESTEasy";
     }
 
+    @POST
+    public Response createUser(CreateUserCmd cmd){
+        return Response.status(HttpStatus.SC_CREATED).entity(usersService.createUser(cmd)).build();
+    }
+    @POST
+    @Path("/admin")
+    public Response createAdmin(CreateUserCmd cmd){
+        return Response.status(HttpStatus.SC_CREATED).entity(usersService.createAdmin(cmd)).build();
+    }
+
     @GET
+    public List<UserInfo> getActiveUser(){
+        return usersService.findActiveUsers();
+    }
+    @GET
+    @Path("/all")
     public List<UserInfo> getAllUsers(){
-        return usersService.findAll();
+        return usersService.findAllUsers();
+    }
+
+    @DELETE
+    @Path("/{user}")
+    public Response disableUser(@PathParam("user") String user){
+        usersService.disableUser();
+        return Response.status(HttpStatus.SC_ACCEPTED).build();
+    }
+    @PATCH
+    @Path("/{user}")
+    public Response enableUser(@PathParam("user") String user){
+        usersService.enableUser();
+        return Response.status(HttpStatus.SC_ACCEPTED).build();
+    }
+
+    @PUT
+    public Response updatePassword(UpdatePasswordCmd cmd){
+        usersService.updatePassword(cmd);
+        return Response.status(HttpStatus.SC_ACCEPTED).build();
     }
 }
