@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "experience")
 public class ExperienceEntity extends PanacheEntity {
-    @Id
     @MapsId
     @OneToOne(optional = false)
     public UserEntity user;
