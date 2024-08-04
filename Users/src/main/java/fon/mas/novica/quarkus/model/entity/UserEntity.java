@@ -24,4 +24,16 @@ public class UserEntity extends PanacheEntity {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     public ExperienceEntity experience = new ExperienceEntity(this, 0);
 
+    public UserEntity() {
+    }
+
+    public UserEntity(String email, String firstName, String lastName, String username, String password, RoleEntity role, boolean enabled) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.enabled = enabled;
+    }
 }

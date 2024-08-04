@@ -8,4 +8,11 @@ import jakarta.persistence.Table;
 @Table(name = "roles")
 public class RoleEntity extends PanacheEntity {
     public String name;
+
+    public RoleEntity() {
+    }
+
+    public RoleEntity(String name) {
+        this.name = name;
+    }
 }
