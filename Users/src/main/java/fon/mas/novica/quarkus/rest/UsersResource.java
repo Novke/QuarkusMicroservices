@@ -3,6 +3,7 @@ package fon.mas.novica.quarkus.rest;
 import fon.mas.novica.quarkus.model.dto.login.UpdatePasswordCmd;
 import fon.mas.novica.quarkus.model.dto.user.CreateUserCmd;
 import fon.mas.novica.quarkus.model.dto.user.UserInfo;
+import fon.mas.novica.quarkus.model.dto.user.UserInsight;
 import fon.mas.novica.quarkus.service.UsersService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -42,20 +43,20 @@ public class UsersResource {
     }
     @GET
     @Path("/all")
-    public List<UserInfo> getAllUsers(){
+    public List<UserInsight> getAllUsers(){
         return usersService.findAllUsers();
     }
 
     @DELETE
     @Path("/{user}")
     public Response disableUser(@PathParam("user") String user){
-        usersService.disableUser();
+        usersService.disableUser(user);
         return Response.status(HttpStatus.SC_ACCEPTED).build();
     }
     @PATCH
     @Path("/{user}")
     public Response enableUser(@PathParam("user") String user){
-        usersService.enableUser();
+        usersService.enableUser(user);
         return Response.status(HttpStatus.SC_ACCEPTED).build();
     }
 

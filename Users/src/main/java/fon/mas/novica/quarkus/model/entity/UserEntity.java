@@ -4,6 +4,8 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class UserEntity extends PanacheEntity {
@@ -35,5 +37,16 @@ public class UserEntity extends PanacheEntity {
         this.password = password;
         this.role = role;
         this.enabled = enabled;
+    }
+
+
+    //FUNKCIJE
+
+    public static List<UserEntity> findActiveUsers(){
+        return list("enabled = ?1", true);
+    }
+
+    public static UserEntity findByUsername(String username) {
+        return find("username = ?1", username).firstResult();
     }
 }

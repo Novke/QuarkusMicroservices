@@ -3,12 +3,13 @@ package fon.mas.novica.quarkus.service;
 import fon.mas.novica.quarkus.model.dto.login.UpdatePasswordCmd;
 import fon.mas.novica.quarkus.model.dto.user.CreateUserCmd;
 import fon.mas.novica.quarkus.model.dto.user.UserInfo;
+import fon.mas.novica.quarkus.model.dto.user.UserInsight;
 
 import java.util.List;
 
 public interface UsersService {
 
-    List<UserInfo> findAllUsers();
+    List<UserInsight> findAllUsers();
 
     Object createUser(CreateUserCmd cmd);
 
@@ -16,9 +17,9 @@ public interface UsersService {
 
     List<UserInfo> findActiveUsers();
 
-    void disableUser();
+    void disableUser(String username);
 
-    void enableUser();
+    void enableUser(String username);
 
     void updatePassword(UpdatePasswordCmd cmd);
 }
