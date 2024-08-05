@@ -2,6 +2,7 @@ package fon.mas.novica.quarkus;
 
 import fon.mas.novica.quarkus.model.entity.RoleEntity;
 import fon.mas.novica.quarkus.model.entity.UserEntity;
+import io.quarkus.elytron.security.common.BcryptUtil;
 import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
@@ -34,8 +35,7 @@ public class OnStartTasks {
                             "name",
                             "lastname",
                             "user",
-//                            encoder().encode("pass"),
-                            "pass",
+                            BcryptUtil.bcryptHash("pass"),
                             RoleEntity.findById(1L),
                             true),
                     new UserEntity(
@@ -43,8 +43,7 @@ public class OnStartTasks {
                             "Novica",
                             "Trifkovic",
                             "admin",
-//                            encoder().encode("admin"),
-                            "admin",
+                            BcryptUtil.bcryptHash("admin"),
                             RoleEntity.findById(2L),
                             true
                     )

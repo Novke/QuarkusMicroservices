@@ -1,6 +1,10 @@
 package fon.mas.novica.quarkus.model.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.security.jpa.Password;
+import io.quarkus.security.jpa.Roles;
+import io.quarkus.security.jpa.UserDefinition;
+import io.quarkus.security.jpa.Username;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
@@ -8,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@UserDefinition
 public class UserEntity extends PanacheEntity {
 
     @Email(message = "Invalid email")
@@ -16,8 +21,10 @@ public class UserEntity extends PanacheEntity {
     public String firstName;
     public String lastName;
     @Column(unique = true, nullable = false)
+    @Username
     public String username;
     @Column(nullable = false)
+    @Password
     public String password;
     @ManyToOne(optional = false)
     public RoleEntity role;
@@ -25,6 +32,11 @@ public class UserEntity extends PanacheEntity {
     public boolean enabled = true;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     public ExperienceEntity experience = new ExperienceEntity(this, 0);
+
+    @Roles
+    public String getRoleName(){
+        return role.name;
+    }
 
     public UserEntity() {
     }

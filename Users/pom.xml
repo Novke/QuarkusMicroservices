@@ -100,6 +100,23 @@
             <artifactId>modelmapper</artifactId>
             <version>3.2.1</version>
         </dependency>
+
+<!--        SECURITY  -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-jwt</artifactId>
+        </dependency>
+
+<!--        JWT BUILDING   -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-jwt-build</artifactId>
+        </dependency>
+<!--        SECURITY JPA    -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-security-jpa</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

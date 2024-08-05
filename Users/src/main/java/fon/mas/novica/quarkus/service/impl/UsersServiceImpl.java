@@ -11,6 +11,7 @@ import fon.mas.novica.quarkus.model.dto.user.UserInsight;
 import fon.mas.novica.quarkus.model.entity.RoleEntity;
 import fon.mas.novica.quarkus.model.entity.UserEntity;
 import fon.mas.novica.quarkus.service.UsersService;
+import io.quarkus.elytron.security.common.BcryptUtil;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -35,7 +36,7 @@ public class UsersServiceImpl implements UsersService {
     public Object createUser(CreateUserCmd cmd) {
         UserEntity user = mapper.map(cmd, UserEntity.class);
         user.role = RoleEntity.findById(1L);
-//        userRequest.password = passwordEncoder.encode(userRequest.getPassword());
+        user.password = BcryptUtil.bcryptHash(user.password);
         UserEntity.persist(user);
         return mapper.map(user, UserInfo.class);
     }
@@ -44,7 +45,7 @@ public class UsersServiceImpl implements UsersService {
     public Object createAdmin(CreateUserCmd cmd) {
         UserEntity user = mapper.map(cmd, UserEntity.class);
         user.role = RoleEntity.findById(2L);
-//        userRequest.password = passwordEncoder.encode(userRequest.getPassword());
+        user.password = BcryptUtil.bcryptHash(user.password);
         UserEntity.persist(user);
         return mapper.map(user, UserInfo.class);
     }
@@ -81,12 +82,8 @@ public class UsersServiceImpl implements UsersService {
         UserEntity user = UserEntity.findByUsername(cmd.getUsername());
         if (user == null) throw new BadCredentialsException("Wrong username or password");
 
-        if (
-//                passwordEncoder.matches(cmd.getConfirmPassword(), user.getPassword())
-                user.password.equals(cmd.getConfirmPassword())
-        ){
-//            user.password = passwordEncoder.encode(cmd.getNewPassword());
-            user.password = cmd.getNewPassword();
+        if (BcryptUtil.matches(cmd.getConfirmPassword(), user.password)){
+            user.password = BcryptUtil.bcryptHash(cmd.getNewPassword());
         } else throw new BadCredentialsException("Wrong username or password");
     }
 }
