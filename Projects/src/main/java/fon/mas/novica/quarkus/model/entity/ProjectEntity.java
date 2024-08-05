@@ -32,4 +32,10 @@ public class ProjectEntity extends PanacheEntity {
         tasks.add(task);
     }
 
+    /// FUNKCIJE
+
+    public static List<ProjectEntity> findActiveProjects(){
+        return list("status = ?1 or status = ?2", Status.CREATED, Status.IN_PROGRESS);
+    }
+
 }

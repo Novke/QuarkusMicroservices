@@ -1,4 +1,4 @@
-package fon.mas.novica.quarkus.model.config;
+package fon.mas.novica.quarkus.config;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
