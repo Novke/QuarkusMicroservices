@@ -86,4 +86,30 @@ public class UsersServiceImpl implements UsersService {
             user.password = BcryptUtil.bcryptHash(cmd.getNewPassword());
         } else throw new BadCredentialsException("Wrong username or password");
     }
+
+    @Override
+    public UserInsight findById(Long id) {
+        UserEntity user = UserEntity.findById(id);
+        if (user == null) throw new UserNotFoundException("User with id " + id + " not found!");
+
+        return mapper.map(user, UserInsight.class);
+    }
+
+    @Override
+    public Boolean checkAuthorization(String username, List<Long> ids) {
+        UserEntity user = UserEntity.findByUsername(username);
+        if (user == null) return false;
+
+        return ids.contains(user.id);
+    }
+
+    @Override
+    public Integer increaseTaskCount(Long id) {
+        UserEntity user = UserEntity.findById(id);
+        if (user == null) throw new UserNotFoundException("User with id " + id + " not found!");
+
+        Integer xp = user.experience.increase();
+        UserEntity.persist(user);
+        return xp;
+    }
 }

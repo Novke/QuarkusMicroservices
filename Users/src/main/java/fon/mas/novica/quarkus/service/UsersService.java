@@ -22,4 +22,10 @@ public interface UsersService {
     void enableUser(String username);
 
     void updatePassword(UpdatePasswordCmd cmd);
+
+    UserInsight findById(Long id);
+
+    Boolean checkAuthorization(String username, List<Long> ids);
+
+    Integer increaseTaskCount(Long id);
 }
