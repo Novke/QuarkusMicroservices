@@ -14,7 +14,7 @@ public interface ProjectsService {
 
     List<ProjectInfo> findActiveProjects();
 
-    List<ProjectInfo> findAllProjects();
+    List<ProjectDetails> findAllProjects();
 
     TaskInfo addTask(Long id, CreateTaskCmd cmd);
 

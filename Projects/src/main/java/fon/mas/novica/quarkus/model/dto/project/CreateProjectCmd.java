@@ -1,12 +1,16 @@
 package fon.mas.novica.quarkus.model.dto.project;
 
+import jakarta.json.bind.annotation.JsonbDateFormat;
+
 import java.time.LocalDate;
 
 public class CreateProjectCmd {
 
     private String name;
     private String description;
+    @JsonbDateFormat("dd.MM.yyyy")
     private LocalDate startDate;
+    @JsonbDateFormat("dd.MM.yyyy")
     private LocalDate dueDate;
     private Long supervisorId;
 
@@ -51,5 +55,16 @@ public class CreateProjectCmd {
 
     public void setSupervisorId(Long supervisorId) {
         this.supervisorId = supervisorId;
+    }
+
+    @Override
+    public String toString() {
+        return "CreateProjectCmd{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", dueDate=" + dueDate +
+                ", supervisorId=" + supervisorId +
+                '}';
     }
 }

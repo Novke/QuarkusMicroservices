@@ -25,6 +25,7 @@ public class ProjectsResource {
 
     @POST
     public Response createProject(CreateProjectCmd cmd) {
+        System.out.println("Recieved cmd: " + cmd);
         ProjectInfo projectInfo = projectsService.createBlankProject(cmd);
         return Response.status(Response.Status.CREATED).entity(projectInfo).build();
     }
@@ -38,7 +39,7 @@ public class ProjectsResource {
     @GET
     @Path("/all")
     public Response getAllProjects() {
-        List<ProjectInfo> allProjects = projectsService.findAllProjects();
+        List<ProjectDetails> allProjects = projectsService.findAllProjects();
         return Response.ok(allProjects).build();
     }
 

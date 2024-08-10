@@ -13,10 +13,6 @@ public class TaskEntity extends PanacheEntity {
     public enum Priority {
         LOW, NORMAL, HIGH
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public Long id;
     public String title;
     public String description;
     @Enumerated(EnumType.STRING)

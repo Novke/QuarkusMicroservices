@@ -3,6 +3,7 @@ package fon.mas.novica.quarkus.model.dto.project;
 
 import fon.mas.novica.quarkus.model.dto.task.TaskInfo;
 import fon.mas.novica.quarkus.model.enums.Status;
+import jakarta.json.bind.annotation.JsonbDateFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,9 +12,13 @@ public class ProjectDetails {
 
     private String name;
     private String description;
+    @JsonbDateFormat("dd.MM.yyyy")
     private LocalDate startDate;
+    @JsonbDateFormat("dd.MM.yyyy")
     private LocalDate dueDate;
+    @JsonbDateFormat("dd.MM.yyyy")
     private LocalDate endDate;
+    @JsonbDateFormat("dd.MM.yyyy")
     private LocalDate createdDate;
     private Status status;
     private String supervisorName;

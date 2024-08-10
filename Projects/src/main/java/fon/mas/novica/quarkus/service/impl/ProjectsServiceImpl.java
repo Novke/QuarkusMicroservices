@@ -53,9 +53,9 @@ public class ProjectsServiceImpl implements ProjectsService {
     }
 
     @Override
-    public List<ProjectInfo> findAllProjects() {
+    public List<ProjectDetails> findAllProjects() {
         return ProjectEntity.listAll().stream()
-                .map(p -> mapper.map(p, ProjectInfo.class))
+                .map(p -> mapper.map(p, ProjectDetails.class))
                 .toList();
     }
 
