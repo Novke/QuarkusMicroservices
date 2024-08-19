@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ProjectDetails {
 
+    private Long id;
     private String name;
     private String description;
     @JsonbDateFormat("dd.MM.yyyy")

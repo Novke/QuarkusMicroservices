@@ -104,10 +104,15 @@
 <!--            <artifactId>resteasy-reactive-client</artifactId>-->
 <!--            &lt;!&ndash;            <version>3.13.2</version>&ndash;&gt;-->
 <!--        </dependency>-->
-<!--        BUGFIX CLIENT NE RADI ?     -->
+<!--         CLIENT PROXY     -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-client</artifactId>
+        </dependency>
+<!--        RESILIENCE  -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
         </dependency>
         <!--        STORK & CONSUL  -->
         <dependency>

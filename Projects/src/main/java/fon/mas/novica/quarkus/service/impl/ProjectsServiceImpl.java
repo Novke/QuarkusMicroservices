@@ -197,9 +197,12 @@ public class ProjectsServiceImpl implements ProjectsService {
     private UserInfo findUserById(Long id) {
         try {
             return usersService.findUserById(id);
+        } catch (ResteasyWebApplicationException ex){
+            int status = ex.getResponse().getStatus();
+            if (status == 404) throw new UserNotFoundException("User with id " + id + " not found! ", ex);
+            throw new UsersServiceUnavailableException("Users service communication failed! Response code: " + status + "\n" + ex.getResponse().getEntity());
         } catch (Exception ex) {
-            logger.error("FIND USER BY ID ERROR!", ex);
-            throw new UserNotFoundException("User with id " + id + " not found", ex);
+            throw new UsersServiceUnavailableException("Users service unavailable, i think",ex);
         }
     }
 }
