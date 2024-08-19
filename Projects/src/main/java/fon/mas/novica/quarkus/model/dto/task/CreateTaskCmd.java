@@ -2,6 +2,7 @@ package fon.mas.novica.quarkus.model.dto.task;
 
 
 import fon.mas.novica.quarkus.model.entity.TaskEntity;
+import jakarta.json.bind.annotation.JsonbDateFormat;
 
 import java.time.LocalDate;
 
@@ -10,7 +11,9 @@ public class CreateTaskCmd {
     private String title;
     private String description;
     private TaskEntity.Priority priority;
+    @JsonbDateFormat("dd.MM.yyyy")
     private LocalDate dueDate;
+    @JsonbDateFormat("dd.MM.yyyy")
     private LocalDate endDate;
     private Long supervisorId;
     private Long assigneeId;

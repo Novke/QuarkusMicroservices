@@ -1,5 +1,7 @@
 package fon.mas.novica.quarkus.model.dto.notification;
 
+import jakarta.json.bind.annotation.JsonbDateFormat;
+
 import java.time.LocalDate;
 
 public class NewAssignmentNotif {
@@ -7,6 +9,7 @@ public class NewAssignmentNotif {
     private String lastName;
     private String supervisor;
     private String email;
+    @JsonbDateFormat("dd.MM.yyyy")
     private LocalDate dueDate;
     private String priority;
     private Long taskId;

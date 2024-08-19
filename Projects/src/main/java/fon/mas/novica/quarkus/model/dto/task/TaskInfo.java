@@ -2,6 +2,7 @@ package fon.mas.novica.quarkus.model.dto.task;
 
 import fon.mas.novica.quarkus.model.entity.TaskEntity;
 import fon.mas.novica.quarkus.model.enums.Status;
+import jakarta.json.bind.annotation.JsonbDateFormat;
 
 import java.time.LocalDate;
 
@@ -11,6 +12,7 @@ public class TaskInfo {
     private String title;
     private Status status;
     private TaskEntity.Priority priority;
+    @JsonbDateFormat("dd.MM.yyyy")
     private LocalDate dueDate;
     private String assigneeName;
     private String supervisorName;
