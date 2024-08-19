@@ -25,7 +25,6 @@ public class ProjectsResource {
 
     @POST
     public Response createProject(CreateProjectCmd cmd) {
-        System.out.println("Recieved cmd: " + cmd);
         ProjectInfo projectInfo = projectsService.createBlankProject(cmd);
         return Response.status(Response.Status.CREATED).entity(projectInfo).build();
     }

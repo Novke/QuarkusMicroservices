@@ -32,7 +32,7 @@ import java.util.Objects;
 @Transactional
 public class ProjectsServiceImpl implements ProjectsService {
 
-    @Inject
+    @RestClient
     UsersServiceClient usersService;
 
     @Inject
@@ -198,7 +198,8 @@ public class ProjectsServiceImpl implements ProjectsService {
         try {
             return usersService.findUserById(id);
         } catch (Exception ex) {
-            throw new UserNotFoundException(id + "");
+            logger.error("FIND USER BY ID ERROR!", ex);
+            throw new UserNotFoundException("User with id " + id + " not found", ex);
         }
     }
 }
