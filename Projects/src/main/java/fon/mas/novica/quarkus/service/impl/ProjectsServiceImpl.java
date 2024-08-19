@@ -21,7 +21,11 @@ import fon.mas.novica.quarkus.service.ProjectsService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.jboss.resteasy.client.exception.ResteasyWebApplicationException;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,10 +39,11 @@ public class ProjectsServiceImpl implements ProjectsService {
     @RestClient
     UsersServiceClient usersService;
 
-    @Inject
+    @RestClient
     NotificationsServiceClient notificationsService;
     @Inject
     ModelMapper mapper;
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public ProjectInfo createBlankProject(CreateProjectCmd cmd) {
@@ -197,12 +202,12 @@ public class ProjectsServiceImpl implements ProjectsService {
     private UserInfo findUserById(Long id) {
         try {
             return usersService.findUserById(id);
-        } catch (ResteasyWebApplicationException ex){
+        } catch (ResteasyWebApplicationException ex) {
             int status = ex.getResponse().getStatus();
             if (status == 404) throw new UserNotFoundException("User with id " + id + " not found! ", ex);
             throw new UsersServiceUnavailableException("Users service communication failed! Response code: " + status + "\n" + ex.getResponse().getEntity());
         } catch (Exception ex) {
-            throw new UsersServiceUnavailableException("Users service unavailable, i think",ex);
+            throw new UsersServiceUnavailableException("Users service unavailable, i think", ex);
         }
     }
 }
