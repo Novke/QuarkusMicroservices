@@ -24,7 +24,7 @@ public class NotificationsResource {
     @Path("/new-assignment")
     public Response notifyAssignee(NewAssignmentNotif notification){
         log.info("NEW ASSIGNMENT RECIEVED! {}", notification);
-//        emailService.send(notification);
+        emailService.newAssignment(notification);
         return Response.ok("Uspesno").build();
     }
 
@@ -32,7 +32,7 @@ public class NotificationsResource {
     @Path("/task-completed")
     public Response notifySupervisorTaskCompleted(TaskCompletedNotif notification){
         log.info("TASK COMPLETED! {}", notification);
-//        emailService.send(notification);
+        emailService.taskCompleted(notification);
         return Response.ok("Uspesno").build();
     }
 
