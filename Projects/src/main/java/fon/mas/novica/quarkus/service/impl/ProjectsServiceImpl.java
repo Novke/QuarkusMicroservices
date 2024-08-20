@@ -1,5 +1,6 @@
 package fon.mas.novica.quarkus.service.impl;
 
+import fon.mas.novica.quarkus.exception.*;
 import fon.mas.novica.quarkus.model.dto.notification.NewAssignmentNotif;
 import fon.mas.novica.quarkus.model.dto.notification.TaskCompletedNotif;
 import fon.mas.novica.quarkus.model.dto.project.CreateProjectCmd;
@@ -11,10 +12,6 @@ import fon.mas.novica.quarkus.model.dto.users.UserInfo;
 import fon.mas.novica.quarkus.model.entity.ProjectEntity;
 import fon.mas.novica.quarkus.model.entity.TaskEntity;
 import fon.mas.novica.quarkus.model.enums.Status;
-import fon.mas.novica.quarkus.exception.ProjectNotFoundException;
-import fon.mas.novica.quarkus.exception.TaskNotFoundException;
-import fon.mas.novica.quarkus.exception.UnauthorizedActionException;
-import fon.mas.novica.quarkus.exception.UserNotFoundException;
 import fon.mas.novica.quarkus.io.NotificationsServiceClient;
 import fon.mas.novica.quarkus.io.UsersServiceClient;
 import fon.mas.novica.quarkus.service.ProjectsService;
